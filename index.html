@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>AQUA LUXE — Katalog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --blue-deep: #0A1628;
+      --blue-bright: #0077B6;
+      --blue-light: #00B4D8;
+      --gold: #C9A84C;
+      --white: #F0F8FF;
+      --gray: rgba(255,255,255,0.5);
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: var(--blue-deep);
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+      padding-bottom: 60px;
+    }
+
+    /* Background */
+    .water-bg {
+      position: fixed; inset: 0; z-index: 0; overflow: hidden;
+    }
+    .water-bg::before {
+      content: '';
+      position: absolute;
+      width: 200%; height: 200%;
+      top: -50%; left: -50%;
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(0,119,182,0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 60%, rgba(0,180,216,0.2) 0%, transparent 50%);
+      animation: waterMove 8s ease-in-out infinite alternate;
+    }
+    @keyframes waterMove {
+      0% { transform: translate(0,0); }
+      100% { transform: translate(2%,3%); }
+    }
+    .waves { position: fixed; bottom: 0; left: 0; width: 100%; height: 120px; z-index: 0; opacity: 0.12; }
+    .wave {
+      position: absolute; bottom: 0; left: 0; width: 200%; height: 80px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%2300B4D8' d='M0,50 C360,100 720,0 1080,50 C1260,75 1380,60 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E") repeat-x;
+      animation: waveAnim 6s linear infinite;
+    }
+    .wave:nth-child(2) {
+      bottom: 8px; opacity: 0.5;
+      animation: waveAnim 8s linear infinite reverse;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%230077B6' d='M0,30 C400,80 800,10 1200,60 C1320,80 1400,50 1440,40 L1440,100 L0,100 Z'/%3E%3C/svg%3E") repeat-x;
+    }
+    @keyframes waveAnim {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .grid-lines {
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(0,180,216,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,216,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Container */
+    .container {
+      position: relative; z-index: 10;
+      text-align: center;
+      padding: clamp(1rem, 5vw, 2rem);
+      width: 100%;
+      max-width: 540px;
+      animation: fadeInUp 0.9s ease forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Top line */
+    .top-line {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+    }
+    .top-line-bar {
+      height: 1px; width: clamp(30px, 8vw, 60px);
+      background: linear-gradient(to right, transparent, var(--blue-light));
+    }
+    .top-line-bar:last-child { background: linear-gradient(to left, transparent, var(--blue-light)); }
+    .top-line-text {
+      font-size: clamp(8px, 2vw, 10px);
+      letter-spacing: 0.3em; color: var(--blue-light); text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* Logo */
+    .logo-wrap {
+      margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+    }
+    .logo-icon {
+      width: clamp(64px, 15vw, 90px);
+      height: clamp(64px, 15vw, 90px);
+      margin: 0 auto clamp(0.8rem, 3vw, 1.2rem);
+      position: relative;
+    }
+    .logo-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 1px solid rgba(0,180,216,0.3);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .logo-ring:nth-child(2) { inset: -6px; border-color: rgba(0,180,216,0.15); animation-delay: 0.5s; }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.7; }
+    }
+    .logo-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 10vw, 52px);
+      letter-spacing: 0.2em; color: var(--white); line-height: 1;
+    }
+    .logo-name span { color: var(--blue-light); }
+    .logo-tagline {
+      font-size: clamp(8px, 2vw, 10px);
+      letter-spacing: clamp(0.2em, 3vw, 0.5em);
+      color: var(--gray); text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* Divider */
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: clamp(1rem, 3vw, 1.5rem) auto clamp(1.2rem, 4vw, 2rem);
+    }
+    .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(0,180,216,0.4), transparent); }
+    .divider-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+
+    /* Select title */
+    .select-title {
+      font-size: clamp(9px, 2.5vw, 12px);
+      letter-spacing: 0.25em; color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: clamp(1.2rem, 4vw, 2rem);
+    }
+
+    /* Language buttons */
+    .lang-buttons {
+      display: flex;
+      gap: clamp(12px, 4vw, 20px);
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+
+    .lang-btn {
+      display: flex; flex-direction: column; align-items: center;
+      gap: clamp(8px, 2vw, 12px);
+      padding: clamp(1.2rem, 5vw, 2rem) clamp(1rem, 5vw, 2.5rem);
+      background: rgba(0,119,182,0.08);
+      border: 1px solid rgba(0,180,216,0.2);
+      border-radius: 4px;
+      cursor: pointer; text-decoration: none;
+      transition: all 0.4s ease;
+      flex: 1;
+      max-width: 200px;
+      position: relative; overflow: hidden;
+    }
+    .lang-btn::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, var(--blue-bright), var(--blue-light));
+      transform: scaleX(0); transition: transform 0.4s ease;
+    }
+    .lang-btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,180,216,0.1), transparent);
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .lang-btn:hover::before, .lang-btn:active::before { transform: scaleX(1); }
+    .lang-btn:hover::after, .lang-btn:active::after { opacity: 1; }
+    .lang-btn:hover, .lang-btn:active {
+      border-color: rgba(0,180,216,0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0,119,182,0.3);
+    }
+
+    .lang-flag {
+      font-size: clamp(28px, 8vw, 42px);
+      position: relative; z-index: 1;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+      line-height: 1;
+    }
+    .lang-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(16px, 4.5vw, 22px);
+      letter-spacing: 0.15em; color: var(--white);
+      position: relative; z-index: 1;
+    }
+    .lang-sub {
+      font-size: clamp(8px, 2vw, 10px);
+      letter-spacing: 0.15em; color: var(--blue-light);
+      text-transform: uppercase; position: relative; z-index: 1;
+      text-align: center;
+    }
+    .lang-btn-icon {
+      width: clamp(22px, 6vw, 28px);
+      height: clamp(22px, 6vw, 28px);
+      border-radius: 50%;
+      background: rgba(0,180,216,0.15);
+      border: 1px solid rgba(0,180,216,0.3);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1; transition: all 0.3s ease;
+      color: var(--blue-light);
+      font-size: clamp(12px, 3vw, 14px);
+    }
+    .lang-btn:hover .lang-btn-icon, .lang-btn:active .lang-btn-icon {
+      background: var(--blue-bright); border-color: var(--blue-light); color: white;
+    }
+
+    /* Footer */
+    .footer {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      padding: clamp(0.6rem, 2vw, 0.9rem) 1rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: clamp(8px, 3vw, 20px);
+      z-index: 10;
+      border-top: 1px solid rgba(0,180,216,0.1);
+      background: rgba(10,22,40,0.9);
+      backdrop-filter: blur(10px);
+    }
+    .footer-text {
+      font-size: clamp(9px, 2.5vw, 11px);
+      letter-spacing: 0.1em; color: rgba(255,255,255,0.25); text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .footer-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    .footer-phone {
+      font-size: clamp(10px, 2.8vw, 12px);
+      color: var(--blue-light); letter-spacing: 0.08em;
+      text-decoration: none; transition: color 0.3s;
+      white-space: nowrap;
+    }
+    .footer-phone:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+  <div class="water-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="waves">
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+
+  <div class="container">
+    <div class="top-line">
+      <div class="top-line-bar"></div>
+      <div class="top-line-text">Rasmiy Katalog · Официальный каталог</div>
+      <div class="top-line-bar"></div>
+    </div>
+
+    <div class="logo-wrap">
+      <div class="logo-icon">
+        <div class="logo-ring"></div>
+        <div class="logo-ring"></div>
+        <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;width:100%;height:100%;">
+          <circle cx="45" cy="45" r="36" fill="rgba(0,119,182,0.2)" stroke="rgba(0,180,216,0.5)" stroke-width="1"/>
+          <path d="M22 45 C28 38 34 52 40 45 C46 38 52 52 58 45 C64 38 68 48 68 45" stroke="#00B4D8" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M22 54 C28 47 34 61 40 54 C46 47 52 61 58 54 C64 47 68 57 68 54" stroke="#0077B6" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+          <path d="M45 20 C45 20 36 31 36 38 C36 42.9 40.1 47 45 47 C49.9 47 54 42.9 54 38 C54 31 45 20 45 20Z" fill="#00B4D8" opacity="0.9"/>
+        </svg>
+      </div>
+      <div class="logo-name">AQUA <span>LUXE</span></div>
+      <div class="logo-tagline">Havuz & Sauna · Бассейн & Сауна</div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="select-title">Tilni tanlang &nbsp;·&nbsp; Выберите язык</div>
+
+    <div class="lang-buttons">
+      <a href="katalog-uz.pdf" class="lang-btn" target="_blank">
+        <div class="lang-flag">🇺🇿</div>
+        <div class="lang-name">O'ZBEK</div>
+        <div class="lang-sub">Katalogni ochish</div>
+        <div class="lang-btn-icon">↓</div>
+      </a>
+      <a href="katalog-ru.pdf" class="lang-btn" target="_blank">
+        <div class="lang-flag">🇷🇺</div>
+        <div class="lang-name">РУССКИЙ</div>
+        <div class="lang-sub">Открыть каталог</div>
+        <div class="lang-btn-icon">↓</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-text">© 2026 AQUA LUXE</span>
+    <div class="footer-dot"></div>
+    <a href="tel:+998903278008" class="footer-phone">+998 90 327 80 08</a>
+  </div>
+</body>
+</html>
